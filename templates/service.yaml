@@ -1,0 +1,23 @@
+
+{{ range $i := until ( .Values.replicas | int)}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $.Release.Name }}-service-{{ $i }}
+  annotations:
+    #metallb.universe.tf/address-pool: ip-addresspool-dgnsi-sbd01-amq
+  labels:
+    app: {{ $.Release.Name }}
+spec:
+  selector:
+    statefulset.kubernetes.io/pod-name: {{ $.Release.Name }}-{{ $i }}
+  type: LoadBalancer
+  loadBalancerIP: {{ $.Values.loadbalancerBaseIP }}{{ $i }}
+  allocateLoadBalancerNodePorts: false
+  ports:
+    - protocol: TCP
+      name: client
+      port: 9094
+      targetPort: external
+---
+{{ end }}
