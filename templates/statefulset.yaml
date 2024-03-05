@@ -38,7 +38,7 @@ spec:
             KAFKA_NODE_ID=$(echo $HOSTNAME | grep -o '[^-]*$')
             echo "L'index de ce Pod est: $KAFKA_NODE_ID"
             export KAFKA_NODE_ID
-            KAFKA_ADVERTISED_LISTENERS=$(eval echo 'CLIENT://{{ .Release.Name }}-controller-$KAFKA_NODE_ID.kafka-controller-headless:9092,INTERNAL://{{ .Release.Name }}-controller-$KAFKA_NODE_ID.{{ .Release.Name }}-controller-headless:9094,EXTERNAL://{{ .Values.loadbalancerBaseIP }}$KAFKA_NODE_ID:9094')
+            KAFKA_ADVERTISED_LISTENERS=$(eval echo 'CLIENT://{{ .Release.Name }}-$KAFKA_NODE_ID.kafka-service-headless:9092,INTERNAL://{{ .Release.Name }}-$KAFKA_NODE_ID.{{ .Release.Name }}-service-headless:9094,EXTERNAL://{{ .Values.loadbalancerBaseIP }}$KAFKA_NODE_ID:9094')
             echo "advertised.listeners=$KAFKA_ADVERTISED_LISTENERS"
             export KAFKA_ADVERTISED_LISTENERS
             #while true; do echo hello; sleep 10;done

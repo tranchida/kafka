@@ -10,6 +10,8 @@ spec:
       port: 9092
     - name: tcp-controller
       port: 9093
+    - name: tcp-internal
+      port: 9094     
   clusterIP: None 
   selector:
     app: {{ .Release.Name }}
