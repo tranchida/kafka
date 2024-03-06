@@ -36,7 +36,7 @@ spec:
         args: 
           - | 
             export KAFKA_NODE_ID=$(echo $HOSTNAME | grep -o '[^-]*$')
-            export EXTERNAL_IP=$(eval echo "{{ .Values.loadbalancerIP: }}" | tr -d '[]' | awk -v idx=$KAFKA_NODE_ID '{print $((idx+1))'})
+            export EXTERNAL_IP=$(eval echo "{{ .Values.loadbalancerIP }}" | tr -d '[]' | awk -v idx=$KAFKA_NODE_ID '{print $((idx+1))'})
             export KAFKA_ADVERTISED_LISTENERS=$(eval echo 'CLIENT://{{ .Release.Name }}-$KAFKA_NODE_ID.kafka-service-headless:9092,INTERNAL://{{ .Release.Name }}-$KAFKA_NODE_ID.{{ .Release.Name }}-service-headless:9094,EXTERNAL://$EXTERNAL_IP:9094' )
             echo "KAFKA_NODE_ID: $KAFKA_NODE_ID"
             echo "EXTERNAL_IP: $EXTERNAL_IP"
