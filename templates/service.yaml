@@ -12,7 +12,7 @@ spec:
   selector:
     statefulset.kubernetes.io/pod-name: {{ $.Release.Name }}-{{ $i }}
   type: LoadBalancer
-  loadBalancerIP: {{ $.Values.loadbalancerBaseIP }}{{ $i }}
+  loadBalancerIP: {{ index $.Values.loadbalancerIP $i }}
   allocateLoadBalancerNodePorts: false
   ports:
     - protocol: TCP
