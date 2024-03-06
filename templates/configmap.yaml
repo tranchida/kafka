@@ -1,35 +1,6 @@
 apiVersion: v1
-kind: ConfigMap
+kind: Secret
 metadata:
   name: {{ .Release.Name }}-server-config
 data: 
-  server.properties: |-
-    # Listeners configuration, comment set in environment variable
-    #listeners=CLIENT://:9092,INTERNAL://:9094,EXTERNAL://:9095,CONTROLLER://:9093
-    #advertised.listeners=CLIENT://esb-kafka-0:9092,INTERNAL://esb-kafka-0:9094,EXTERNAL://:9094
-    listener.security.protocol.map=CLIENT:SASL_PLAINTEXT,INTERNAL:SASL_PLAINTEXT,CONTROLLER:SASL_PLAINTEXT,EXTERNAL:SASL_PLAINTEXT
-
-    # KRaft process roles, comment set in environment variable
-    #node.id=0
-    #process.roles=controller,broker
-    controller.listener.names=CONTROLLER
-    #controller.quorum.voters=0@esb-kafka-0:9093
-
-    # Kraft Controller listener SASL settings
-    sasl.mechanism.controller.protocol=PLAIN
-    listener.name.controller.sasl.enabled.mechanisms=PLAIN
-    listener.name.controller.plain.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="controller_user" password="NCLQWcYHSe" user_controller_user="NCLQWcYHSe";
-
-    # Kafka data logs directory
-    log.dirs=/var/log/kafka/data
-
-    sasl.enabled.mechanisms=PLAIN
-
-    # Interbroker configuration
-    inter.broker.listener.name=INTERNAL
-    sasl.mechanism.inter.broker.protocol=PLAIN
-
-    # Listeners SASL JAAS configuration
-    listener.name.client.plain.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="admin" password="admin" user_user1="gkNPwnAgxd" user_xcigta="50B1Aoa8Rq";
-    listener.name.internal.plain.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="inter_broker_user" password="26chrt2TH2" user_inter_broker_user="26chrt2TH2" user_user1="gkNPwnAgxd" user_xcigta="50B1Aoa8Rq";
-    listener.name.external.plain.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="admin" password="admin" user_user1="gkNPwnAgxd" user_xcigta="50B1Aoa8Rq";
+  server.properties: {{ tpl (.Files.Get "conf/server.properties") . | b64enc}}

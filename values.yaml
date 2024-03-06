@@ -1,6 +1,22 @@
 replicas: 3
 
 loadbalancerIP: 
-- 192.168.1.10
-- 192.168.1.11
-- 192.168.1.12
+- 192.168.2.10
+- 192.168.2.20
+- 192.168.2.30
+
+controller:
+  username: controller
+  password: NCLQWcYHSe
+
+interBroker:
+  username: interBroker
+  password: 26chrt2TH2
+
+users:
+  - name: xcigta
+    password: test
+  - name: audit
+    password: test
+
+
