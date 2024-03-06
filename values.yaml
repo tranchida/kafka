@@ -14,9 +14,9 @@ interBroker:
   password: 26chrt2TH2
 
 users:
-  - name: xcigta
+  - username: xcigta
     password: test
-  - name: audit
+  - username: audit
     password: test
 
 
