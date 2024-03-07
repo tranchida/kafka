@@ -19,4 +19,8 @@ users:
   - username: audit
     password: test
 
+ssl:
+  keystorePassword: password
+  keyPassword: password
+  truststorePassword: password
 

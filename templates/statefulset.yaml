@@ -86,6 +86,8 @@ spec:
         - name: server-config
           mountPath: /mnt/shared/config/server.properties
           subPath: server.properties
+        - name: server-jks
+          mountPath: /etc/kafka/secrets
       securityContext:
         runAsUser: 101
         runAsGroup: 101
@@ -94,6 +96,9 @@ spec:
       - name: server-config
         secret:
           secretName: {{.Release.Name}}-server-config
+      - name: server-jks
+        secret:
+          secretName: {{.Release.Name }}-server-jks
   volumeClaimTemplates:
   - metadata:
       name: config
