@@ -89,9 +89,6 @@ spec:
         - name: server-jks
           mountPath: /etc/kafka/secrets
       securityContext:
-        runAsUser: 101
-        runAsGroup: 101
-        fsGroup: 101
       volumes:
       - name: server-config
         secret:
