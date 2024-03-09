@@ -17,7 +17,7 @@ spec:
     spec:        
       containers:
       - name: {{ .Release.Name }}
-        image: apache/kafka:3.7.0
+        image: tranchida/kafka:3.7.0
         imagePullPolicy: IfNotPresent
         ports:
         - name: controller
@@ -41,7 +41,7 @@ spec:
             echo "KAFKA_NODE_ID: $KAFKA_NODE_ID"
             echo "EXTERNAL_IP: $EXTERNAL_IP"
             echo "KAFKA_ADVERTISED_LISTENERS: $KAFKA_ADVERTISED_LISTENERS"
-
+            curl -L -o /var/log/kafka/jolokia-agent.jar https://repo1.maven.org/maven2/org/jolokia/jolokia-agent-jvm/2.0.2/jolokia-agent-jvm-2.0.2.jar
             #while true; do echo hello; sleep 10;done
             exec /etc/kafka/docker/run
         #args: [ "while true; do echo hello; sleep 10;done" ]

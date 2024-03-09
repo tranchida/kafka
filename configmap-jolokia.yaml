@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-jolokia
+binaryData:
+  jolokia-jvm-agent.jar: {{ .Files.Get "conf/jolokia-agent-jvm-2.0.2-javaagent.jar" | b64enc }}
+  
